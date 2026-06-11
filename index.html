@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jardim do Nosso Amor 🌸</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffeef8, #f0f8ff);
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      color: #5d2a4b;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    h1 {
+      font-size: 3.2rem;
+      margin: 0;
+      color: #ff6b9d;
+    }
+    .subtitle {
+      font-size: 1.5rem;
+      color: #ff8cc2;
+    }
+
+    .garden {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .flower {
+      background: white;
+      border-radius: 30px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 107, 157, 0.2);
+      transition: all 0.4s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flower:hover {
+      transform: scale(1.1) rotate(3deg);
+      box-shadow: 0 20px 40px rgba(255, 107, 157, 0.3);
+    }
+
+    .flower::before {
+      content: '🌸';
+      font-size: 4.5rem;
+      display: block;
+      margin-bottom: 15px;
+      transition: all 0.5s;
+    }
+
+    .flower.opened::before {
+      content: '🌺';
+      transform: scale(1.3);
+    }
+
+    .message {
+      display: none;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #5d2a4b;
+    }
+
+    .flower.opened .message {
+      display: block;
+    }
+
+    .floating {
+      position: fixed;
+      font-size: 2rem;
+      animation: float 12s infinite linear;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-100vh) rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 50px;
+      font-size: 1.3rem;
+      color: #ff6b9d;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Meu Jardim Secreto 🌷</h1>
+    <p class="subtitle">Um cantinho só nosso, cheio de amor</p>
+  </header>
+
+  <div class="garden" id="garden"></div>
+
+  <footer>
+    <p>Para o meu namorado mais lindo do mundo 💕</p>
+    <p>Te amo até o céu e de volta ✨</p>
+  </footer>
+
+  <script>
+    const flowers = [
+      { emoji: "🌷", title: "Flor do Sorriso", text: "Seu sorriso ilumina meus dias mais cinza. Obrigada por sorrir pra mim todos os dias, mesmo nos mais dificeis." },
+      { emoji: "🌹", title: "Flor do Abraço", text: "Seus abraços são meu lugar favorito no mundo inteiro." },
+      { emoji: "🌼", title: "Flor do Beijo", text: "Cada beijinho seu é uma borboletinha no meu coração." },
+      { emoji: "🌺", title: "Flor do Orgulho", text: "Tenho tanto orgulho de ser seu namorado. Você é muito especial." },
+      { emoji: "💐", title: "Flor Especial", text: "Você é o presente mais bonito que a vida me deu. Eu te amo demais minha morceguinha!" }
+    ];
+
+    const garden = document.getElementById('garden');
+
+    flowers.forEach((flower, index) => {
+      const div = document.createElement('div');
+      div.className = 'flower';
+      div.innerHTML = `
+        <div style="font-size:4rem; margin-bottom:10px;">${flower.emoji}</div>
+        <h3>${flower.title}</h3>
+        <p class="message">${flower.text}</p>
+      `;
+      
+      div.addEventListener('click', () => {
+        div.classList.toggle('opened');
+      });
+      
+      garden.appendChild(div);
+    });
+
+    // Corações e flores flutuantes fofos
+    function createFloating() {
+      const float = document.createElement('div');
+      float.className = 'floating';
+      float.textContent = ['💕','🌸','🦋','🌷','💖','🐻'][Math.floor(Math.random()*6)];
+      float.style.left = Math.random() * 100 + 'vw';
+      float.style.animationDuration = (Math.random() * 8 + 10) + 's';
+      float.style.fontSize = (Math.random() * 1.5 + 1.8) + 'rem';
+      document.body.appendChild(float);
+
+      setTimeout(() => float.remove(), 20000);
+    }
+
+    setInterval(createFloating, 600);
+  </script>
+</body>
+</html>
